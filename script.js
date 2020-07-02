@@ -1,3 +1,6 @@
+//TODO mobile touch controls and fullscreen
+
+
 var element = document.createElement("div");
 
 const margin = 150;
@@ -90,16 +93,31 @@ function changeImg() {
     downloadingImage.src = imgSrc;
     downloadingImage.onload = function() {
         image.src = this.src
-        let ratio = downloadingImage.width / downloadingImage.height;
+        let wRatio = downloadingImage.width / downloadingImage.height;
+        let hRatio = downloadingImage.height / downloadingImage.width;
         
         if(downloadingImage.width - (2*margin) > window.innerWidth) {
-            image.width = downloadingImage.width = window.innerWidth - (2*margin);    
+            image.width = downloadingImage.width = window.innerWidth - (2*margin);
+            console.log('is in width')    
         }
+        
 
         if(downloadingImage.height - (2*margin) > window.innerHeight) {
             image.height = downloadingImage.height = window.innerHeight - (2*margin);
-            image.width = downloadingImage.width = downloadingImage.height * ratio
+            image.width = downloadingImage.width = downloadingImage.height * wRatio
+            console.log('is in height')
         }
+
+
+        if(image.width / image.height != wRatio) {
+            console.log('ratio not right')
+            image.height = image.width * hRatio;
+        }
+        
+
+        
+
+
         containerClose.style.width = image.width + 'px'
         
         console.log('loaded')
